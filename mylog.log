@@ -1,0 +1,5 @@
+2019-03-27 12:08:12,190[yyyy-MM-dd HH:mm:ss]- 0 -[main] ERROR com.capgemini.bankapp.client.BankAccountClient  - com.capgemini.bankapp.exception.LowBalanceException: You don't have sufficient amount. 
+2019-03-27 12:09:02,972[yyyy-MM-dd HH:mm:ss]- 50782 -[main] ERROR com.capgemini.bankapp.client.BankAccountClient  - com.capgemini.bankapp.exception.LowBalanceException: You don't have sufficient amount. 
+2019-03-27 12:10:24,019[yyyy-MM-dd HH:mm:ss]- 0 -[main] ERROR com.capgemini.bankapp.client.BankAccountClient  - com.capgemini.bankapp.exception.LowBalanceException: You don't have sufficient amount. 
+2019-03-27 12:15:43- 0 -[main] ERROR com.capgemini.bankapp.client.BankAccountClient  - com.capgemini.bankapp.exception.LowBalanceException: You don't have sufficient amount. 
+2019-03-27 12:17:06- 0 -[main] ERROR com.capgemini.bankapp.client.BankAccountClient  - com.capgemini.bankapp.exception.LowBalanceException: You don't have sufficient amount. 

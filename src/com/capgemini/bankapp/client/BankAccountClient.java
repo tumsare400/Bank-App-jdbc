@@ -1,17 +1,23 @@
 package com.capgemini.bankapp.client;
 
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.apache.log4j.Logger;
+
+import com.capgemini.bankapp.exception.BankAccountNotFoundException;
 import com.capgemini.bankapp.exception.LowBalanceException;
 import com.capgemini.bankapp.model.BankAccount;
 import com.capgemini.bankapp.service.BankAccountService;
 import com.capgemini.bankapp.service.impl.BankAccountServiceImpl;
 
 public class BankAccountClient {
-
-	public static void main(String[] args) throws LowBalanceException {
+	
+	static final Logger logger = Logger.getLogger(BankAccountClient.class);
+	
+	public static void main(String[] args) throws LowBalanceException, BankAccountNotFoundException {
 
 		int choice;
 		String accountHolderName;
@@ -27,7 +33,7 @@ public class BankAccountClient {
 			while (true) {
 				System.out.println("1.Add New BankAccount\n2.Withdraw\n3. deposit\n4. fundTransfer\n"
 						+ "5.Delete BankAccount\n6. Display All BankAccount details\n7.Search BankAccount\n"
-						+ "8. Check Balance\n9. Exit\n");
+						+ "8. Check Balance\n9 UpdateBankAccount\n10. Exit\n");
 
 				System.out.println("Enter Your choice:");
 				choice = Integer.parseInt(reader.readLine());
@@ -53,9 +59,16 @@ public class BankAccountClient {
 				case 2:
 					System.out.println("Enter account Id\n");
 					accountId = Long.parseLong(reader.readLine());
-					System.out.println("Enter amount");
+					System.out.println("Enter an  amount");
 					amount = Double.parseDouble(reader.readLine());
-					System.out.println(bankService.withdraw(accountId, amount));
+				
+					try {
+						double balance = bankService.withdraw(accountId, amount);
+						System.out.println("Transaction is successfull,Your current balance:"+balance);
+					}
+					catch(LowBalanceException e) {
+						logger.error(e);
+					}
 					break;
 
 				case 3:
@@ -99,13 +112,26 @@ public class BankAccountClient {
 					break;
 					
 				case 9:
+					System.out.println("Enter account holder name: ");
+					accountHolderName = reader.readLine();
+					System.out.println("Enter account type: ");
+					accountType = reader.readLine();
+					System.out.println("Enter account Id to check balance:");
+					accountId = Long.parseLong(reader.readLine());
+					System.out.println(bankService.UpdateBankAccountDetails(accountId, accountHolderName, accountType));
+					
+                     break;
+                     
+				case 10:
 					System.out.println("Thanks for banking with us");
 					System.exit(0);
                      break;
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			logger.error("Exception:",e);
+			
 		}
 	}
 }
